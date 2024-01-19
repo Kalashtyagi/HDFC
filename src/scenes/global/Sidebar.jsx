@@ -1,16 +1,17 @@
-import { useState } from "react";
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
+import React, { useState } from "react";
+import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import QuizSharpIcon from "@mui/icons-material/QuizSharp";
+import AddIcon from "@mui/icons-material/Add";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -35,6 +36,7 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <Box
@@ -115,13 +117,29 @@ const Sidebar = () => {
             >
               Pages
             </Typography>
-            <Item
-              title="Merchant Profile"
-              to="/form"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            <SubMenu
+              title="Add Merchant"
+              icon={<AddIcon />}
+              style={{
+                color: colors.grey[100],
+              }}
+            >
+              <Item
+                title="Add Single Merchant"
+                to="/form"
+                icon={<PersonAddIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Add Bulk Order"
+                to="/form/bulk"
+                icon={<FileCopyIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </SubMenu>
+
             <Typography
               variant="h6"
               color={colors.grey[300]}
