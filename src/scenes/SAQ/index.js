@@ -10,7 +10,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import DataTable from "react-data-table-component";
 
 const ITEM_HEIGHT = 48;
@@ -39,6 +39,8 @@ export default function Saq() {
   const [dropdownData, setDropdownData] = useState([]);
   const [id, setId] = useState();
   const [apiData, setApiData] = useState([]);
+  const [query, setQuery] = useState("");
+  const [record, setRecord] = useState(apiData);
   const handleMenuItemClick = (event, id) => {
     setId(id);
   };
@@ -49,43 +51,44 @@ export default function Saq() {
     setPersonName(typeof value === "string" ? value.split(",") : value);
   };
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
+  useEffect(() => {
+    const data = apiData.filter((item) => {
+      return query.toLowerCase() === ""
+        ? item
+        : item.name.toLowerCase().includes(query);
+    });
+    setRecord(data);
+  }, [query]);
 
   const columns = [
     {
-      name: "Name",
+      name: <h2>Name</h2>,
       selector: (row) => row?.name,
       sortable: true,
     },
 
     {
-      name: "Street",
+      name: <h2>Street</h2>,
       selector: (row) => row?.address?.street,
       sortable: true,
     },
     {
-      name: "suite",
+      name: <h2>Suite</h2>,
       selector: (row) => row?.address?.suite,
       sortable: true,
     },
     {
-      name: "City",
+      name: <h2>City</h2>,
       selector: (row) => row?.address?.city,
       sortable: true,
     },
     {
-      name: "Phone",
+      name: <h2>Phone</h2>,
       selector: (row) => row?.phone,
       sortable: true,
     },
     {
-      name: "Email",
+      name: <h2>Email</h2>,
       selector: (row) => row?.email,
       sortable: true,
     },
@@ -127,40 +130,39 @@ export default function Saq() {
   return (
     <>
       <Box gridRow="span 6" sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} style={{ justifyContent: "space-between" }}>
           <Grid item xs={4}>
-            <Item>
-              <FormControl sx={{ m: 1, width: 300 }}>
-                <InputLabel id="demo-multiple-name-label">
-                  Select SAQ
-                </InputLabel>
-                <Select
-                  labelId="demo-multiple-name-label"
-                  id="demo-multiple-name"
-                  // multiple
-                  value={personName}
-                  onChange={handleChange}
-                  input={<OutlinedInput label="Name" />}
-                  MenuProps={MenuProps}
-                >
-                  {dropdownData.map((item) => (
-                    <MenuItem
-                      key={item.id}
-                      value={item.name}
-                      style={getStyles(item.name, personName, theme)}
-                      onClick={(event) => handleMenuItemClick(event, item.id)}
-                    >
-                      {item.name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
-            </Item>
+            <FormControl sx={{ m: 1, width: 300 }}>
+              <InputLabel id="demo-multiple-name-label">Select SAQ</InputLabel>
+              <Select
+                labelId="demo-multiple-name-label"
+                id="demo-multiple-name"
+                // multiple
+                value={personName}
+                onChange={handleChange}
+                input={<OutlinedInput label="Name" />}
+                MenuProps={MenuProps}
+              >
+                {dropdownData.map((item) => (
+                  <MenuItem
+                    key={item.id}
+                    value={item.name}
+                    style={getStyles(item.name, personName, theme)}
+                    onClick={(event) => handleMenuItemClick(event, item.id)}
+                  >
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
           </Grid>
-          <Grid marginTop={2} item xs={2}>
-            <Item>
-              <Button variant="contained"> Search </Button>
-            </Item>
+          <Grid item xs={2}>
+            <TextField
+              label="search"
+              size="small"
+              style={{ marginTop: "15px" }}
+              onChange={(e) => setQuery(e.target.value)}
+            ></TextField>
           </Grid>
         </Grid>
       </Box>
