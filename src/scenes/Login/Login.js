@@ -31,6 +31,7 @@ export default function Login() {
   //   console.log(data);
   // }
   const onSubmit = async (data) => {
+    console.log("data", data);
     try {
       const response = await fetch("YOUR_API_ENDPOINT", {
         method: "POST",

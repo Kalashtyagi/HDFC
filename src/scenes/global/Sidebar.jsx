@@ -135,7 +135,7 @@ const Sidebar = () => {
               />
               <Item
                 title="Add Bulk Order"
-                to="/form/bulk"
+                to="bulkupload"
                 icon={<FileCopyIcon />}
                 selected={selected}
                 setSelected={setSelected}

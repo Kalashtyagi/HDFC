@@ -1,4 +1,13 @@
-import { Box, Button, TextField } from "@mui/material";
+import { useState } from "react";
+import {
+  Box,
+  Button,
+  TextField,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
@@ -6,6 +15,16 @@ import { styled } from "@mui/material/styles";
 
 const ChangePass = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  const [openModal, setOpenModal] = useState(false);
+
+  const handleGenerateOTP = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,6 +55,7 @@ const ChangePass = () => {
       console.error("Error:", error.message);
     }
   };
+
   const VisuallyHiddenInput = styled("input")({
     clip: "rect(0 0 0 0)",
     clipPath: "inset(50%)",
@@ -91,7 +111,7 @@ const ChangePass = () => {
             sx={{ gridColumn: "span 2" }}
             required
           />
-          <TextField
+          {/* <TextField
             fullWidth
             variant="filled"
             type="text"
@@ -99,14 +119,44 @@ const ChangePass = () => {
             name="contact"
             sx={{ gridColumn: "span 2" }}
             required
-          />
+          /> */}
         </Box>
         <Box display="flex" justifyContent="center" mt="20px">
-          <Button type="submit" color="secondary" variant="contained">
-            Change Password
+          <Button
+            type="submit"
+            color="secondary"
+            variant="contained"
+            onClick={handleGenerateOTP}
+          >
+            Generate OTP
           </Button>
         </Box>
       </form>
+
+      {/* OTP Modal */}
+      <Dialog open={openModal} onClose={handleCloseModal}>
+        <DialogTitle>Enter OTP</DialogTitle>
+        <DialogContent>
+          <form onSubmit={handleSubmit}>
+            <TextField
+              fullWidth
+              variant="filled"
+              type="text"
+              label="OTP"
+              name="otp"
+              required
+            />
+          </form>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseModal} style={{ color: "white" }}>
+            Cancel
+          </Button>
+          <Button onClick={handleCloseModal} style={{ color: "white" }}>
+            Change Password
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

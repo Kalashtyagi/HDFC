@@ -52,7 +52,7 @@ const Form = () => {
     <Box m="20px">
       <Box display="flex" justifyContent="space-between">
         <Header title="ADD MERCHANT" subtitle="Create a New Merchant Profile" />
-        <Button
+        {/* <Button
           component="label"
           variant="contained"
           startIcon={<CloudUploadIcon />}
@@ -65,7 +65,7 @@ const Form = () => {
         >
           Upload file
           <VisuallyHiddenInput type="file" />
-        </Button>
+        </Button> */}
       </Box>
 
       <form onSubmit={handleSubmit}>

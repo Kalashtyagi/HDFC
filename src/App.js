@@ -13,6 +13,7 @@ import Login from "./scenes/Login/Login";
 import CreateAdmin from "./scenes/createAdmin/CreateAdmin";
 import ChangePass from "./scenes/ChangePassword/ChangePass";
 import ResetPass from "./scenes/Reset password/ResetPass";
+import Bulkupload from "./scenes/form/Bulkupload";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -45,6 +46,7 @@ function App() {
               <Route path="/saqs" element={<Saq />} />
               <Route path="/changePassword" element={<ChangePass />} />
               <Route path="/reset-password" element={<ResetPass />} />
+              <Route path="bulkupload" element={<Bulkupload />} />
             </Routes>
           </main>
         </div>
