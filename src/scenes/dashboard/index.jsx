@@ -19,6 +19,7 @@ import LineChart from "../../components/LineChart";
 import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
 import { newMerchant } from "../../data/mockData";
+import PieActiveArc from "../../components/PieChart";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -237,26 +238,7 @@ const Dashboard = () => {
             mt="25px"
             justifyContent="space-between"
           >
-            <ProgressCircle size="175" />
-            <Box>
-              <List>delhi</List>
-              <List>UttarPradesh</List>
-              {/* <Typography
-                variant="h5"
-                color={colors.greenAccent[500]}
-                sx={{ mt: "15px" }}
-              >
-                Uttarpradesh
-              </Typography>
-
-              <Typography
-                variant="h5"
-                color={colors.greenAccent[500]}
-                sx={{ mt: "15px" }}
-              >
-                Delhi
-              </Typography> */}
-            </Box>
+            <PieActiveArc size="175" />
           </Box>
         </Box>
         <Box

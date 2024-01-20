@@ -3,9 +3,18 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import React from "react";
 
 const CreateAdmin = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [type, setType] = React.useState("");
+  const handleChange = (event) => {
+    setType(event.target.value);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,17 +45,6 @@ const CreateAdmin = () => {
       console.error("Error:", error.message);
     }
   };
-  const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
-    clipPath: "inset(50%)",
-    height: 1,
-    overflow: "hidden",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    whiteSpace: "nowrap",
-    width: 1,
-  });
 
   return (
     <Box m="20px">
@@ -118,15 +116,23 @@ const CreateAdmin = () => {
             sx={{ gridColumn: "span 2" }}
             required
           />
-          <TextField
-            fullWidth
-            variant="filled"
-            type="text"
-            label="Admin_SubAdmin"
-            name="contact"
-            sx={{ gridColumn: "span 2" }}
-            required
-          />
+          <Box sx={{ gridColumn: "span 2" }}>
+            <FormControl variant="filled" fullWidth>
+              <InputLabel id="demo-simple-select-filled-label">
+                Admin Type
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={type}
+                label="Admin Type"
+                onChange={handleChange}
+              >
+                <MenuItem value={10}>Admin_SubAdmin</MenuItem>
+                <MenuItem value={20}>Admin_SuperAdmin</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
         </Box>
         <Box display="flex" justifyContent="center" mt="20px">
           <Button type="submit" color="secondary" variant="contained">
