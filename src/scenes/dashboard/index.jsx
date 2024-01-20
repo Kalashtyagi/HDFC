@@ -13,7 +13,7 @@ import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import LoopIcon from "@mui/icons-material/Loop";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import BookOnlineSharpIcon from "@mui/icons-material/BookOnlineSharp";
-import SubtitlesOffSharpIcon from "@mui/icons-material/SubtitlesOffSharp";
+// import SubtitlesOffSharpIcon from "@mui/icons-material/SubtitlesOffSharp";
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
 import StatBox from "../../components/StatBox";
@@ -109,7 +109,7 @@ const Dashboard = () => {
             progress="0.80"
             increase="+43%"
             icon={
-              <SubtitlesOffSharpIcon
+              <HandshakeIcon
                 sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
               />
             }

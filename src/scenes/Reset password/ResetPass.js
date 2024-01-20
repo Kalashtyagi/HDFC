@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 const defaultTheme = createTheme();
 
-export default function Login() {
+export default function ResetPass() {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     navigate("/dashboard");
@@ -44,7 +44,7 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Reset Password
           </Typography>
           <Box
             component="form"
@@ -62,40 +62,15 @@ export default function Login() {
               autoComplete="email"
               autoFocus
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={() => navigate("/login")}
             >
-              Sign In
+              Reset Password
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="/reset-password" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              {/* <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid> */}
-            </Grid>
           </Box>
         </Box>
       </Container>

@@ -12,6 +12,7 @@ import Update from "./scenes/Update/Update";
 import Login from "./scenes/Login/Login";
 import CreateAdmin from "./scenes/createAdmin/CreateAdmin";
 import ChangePass from "./scenes/ChangePassword/ChangePass";
+import ResetPass from "./scenes/Reset password/ResetPass";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -20,9 +21,10 @@ function App() {
 
   // Check if the current route is the login page
   const isLoginPage = window.location.pathname === "/";
+  const isForgetPassword = window.location.pathname === "/reset-password";
 
   // Hide the sidebar on the login page
-  const sidebarVisible = isLoginPage ? false : isSidebar;
+  const sidebarVisible = isLoginPage || isForgetPassword ? false : isSidebar;
 
   return (
     <ColorModeContext.Provider value={colorMode}>
@@ -42,6 +44,7 @@ function App() {
               <Route path="/createAdmin" element={<CreateAdmin />} />
               <Route path="/saqs" element={<Saq />} />
               <Route path="/changePassword" element={<ChangePass />} />
+              <Route path="/reset-password" element={<ResetPass />} />
             </Routes>
           </main>
         </div>
