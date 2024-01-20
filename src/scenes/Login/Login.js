@@ -13,19 +13,50 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+// import axios from "axios";
 
 const defaultTheme = createTheme();
 
 export default function Login() {
   const navigate = useNavigate();
-  const handleSubmit = (event) => {
-    navigate("/dashboard");
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm();
+  // const onSubmit=(data)=>{
+  //   console.log(data);
+  // }
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch("YOUR_API_ENDPOINT", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
+      });
+
+      if (!response.ok) {
+        // throw new Error(HTTP error! Status: ${response.status});
+      }
+
+      // const responseData = await response.json();
+
+      // console.log("API Response:", responseData);
+
+      navigate("/dashboard");
+
+      reset();
+    } catch (error) {
+      console.error("API Error:", error);
+    }
   };
 
   return (
@@ -48,30 +79,63 @@ export default function Login() {
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
-            noValidate
+            onSubmit={handleSubmit(onSubmit)}
             sx={{ mt: 1 }}
           >
             <TextField
               margin="normal"
-              required
               fullWidth
               id="email"
               label="Email Address"
               name="email"
               autoComplete="email"
               autoFocus
+              {...register("email", {
+                required: true,
+                pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              })}
             />
+            <br />
+            <span
+              style={{
+                position: "absolute",
+                color: "red",
+                fontSize: "14px",
+                marginTop: "-12px",
+              }}
+            >
+              {errors.email?.type === "required" && "Email is required"}
+              {errors.email?.type === "pattern" && "Email is incorrect"}
+            </span>
             <TextField
               margin="normal"
-              required
-              fullWidth
               name="password"
               label="Password"
               type="password"
               id="password"
+              style={{ width: "400px" }}
               autoComplete="current-password"
+              {...register("password", {
+                required: true,
+                minLength: 4,
+                maxLength: 12,
+              })}
             />
+            <br />
+            <span
+              style={{
+                position: "absolute",
+                color: "red",
+                fontSize: "14px",
+                marginTop: "-12px",
+              }}
+            >
+              {errors.password?.type === "required" && "Password is required"}
+              {errors.password?.type === "minLength" &&
+                "Password length must be 4"}
+              {errors.password?.type === "maxLength" &&
+                "Password contains less than 20 character"}
+            </span>
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
@@ -90,11 +154,6 @@ export default function Login() {
                   Forgot password?
                 </Link>
               </Grid>
-              {/* <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid> */}
             </Grid>
           </Box>
         </Box>

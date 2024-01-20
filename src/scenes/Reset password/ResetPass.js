@@ -13,19 +13,44 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+// import axios from "axios";
+import { useForm } from "react-hook-form";
 
 const defaultTheme = createTheme();
 
 export default function ResetPass() {
   const navigate = useNavigate();
-  const handleSubmit = (event) => {
-    navigate("/dashboard");
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    reset,
+  } = useForm();
+  const onSubmit = async (data) => {
+    try {
+      const response = await fetch("YOUR_RESET_PASSWORD_API_ENDPOINT", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: data.email,
+        }),
+      });
+
+      if (!response.ok) {
+        // throw new Error(HTTP error! Status: ${response.status});
+      }
+
+      // const responseData = await response.json();
+
+      // console.log("Reset Password API Response:", responseData);
+
+      reset();
+    } catch (error) {
+      console.error("Reset Password API Error:", error);
+    }
   };
 
   return (
@@ -48,26 +73,42 @@ export default function ResetPass() {
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
-            noValidate
+            onSubmit={handleSubmit(onSubmit)}
             sx={{ mt: 1 }}
           >
             <TextField
               margin="normal"
-              required
               fullWidth
               id="email"
               label="Email Address"
               name="email"
               autoComplete="email"
               autoFocus
+              style={{ width: "400px" }}
+              {...register("email", {
+                required: true,
+                pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              })}
             />
+            <br />
+            <span
+              style={{
+                position: "absolute",
+                color: "red",
+                fontSize: "14px",
+                marginTop: "-12px",
+              }}
+            >
+              {errors.email?.type === "required" && "Email is required"}
+              {errors.email?.type === "pattern" && "Email is incorrect"}
+            </span>
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/")}
             >
               Reset Password
             </Button>
