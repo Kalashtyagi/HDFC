@@ -12,6 +12,8 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import QuizSharpIcon from "@mui/icons-material/QuizSharp";
 import AddIcon from "@mui/icons-material/Add";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LockPersonIcon from "@mui/icons-material/LockPerson";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -89,7 +91,7 @@ const Sidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/"
+              to="/dashboard"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -164,21 +166,28 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Create Admin"
-              to="/signIn"
+              to="/createAdmin"
               icon={<PersonAddIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Sign In"
-              to="/signIn"
-              icon={<PersonAddIcon />}
+              title="Change Password"
+              to="/changePassword"
+              icon={<LockPersonIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Setting"
+              to="/update"
+              icon={<SettingsIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Sign Out"
-              to="/signOut"
+              to="/"
               icon={<LogoutIcon />}
               selected={selected}
               setSelected={setSelected}
