@@ -286,14 +286,25 @@ const Dashboard = () => {
                 >
                   {newItem.merchant}
                 </Typography>
-                <IconButton>
-                  <DownloadOutlinedIcon
+                <Box display="flex">
+                  <IconButton>
+                    <DownloadOutlinedIcon
+                      sx={{
+                        fontSize: "26px",
+                        color: colors.greenAccent[500],
+                      }}
+                    />
+                  </IconButton>
+                  <Button
+                    variant="contained"
                     sx={{
-                      fontSize: "26px",
+                      fontSize: "15px",
                       color: colors.greenAccent[500],
                     }}
-                  />
-                </IconButton>
+                  >
+                    approve
+                  </Button>
+                </Box>
               </Box>
             </>
           ))}

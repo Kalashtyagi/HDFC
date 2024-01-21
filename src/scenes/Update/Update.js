@@ -133,6 +133,40 @@ const Update = () => {
           <TextField
             fullWidth
             variant="filled"
+            type="number"
+            label="Alternative old Phone Number"
+            name="contact"
+            sx={{ gridColumn: "span 2" }}
+            required
+          />
+          <TextField
+            fullWidth
+            variant="filled"
+            type="number"
+            label="Alternative new Phone Number"
+            name="contact"
+            sx={{ gridColumn: "span 2" }}
+            required
+          />
+        </Box>
+        <Box display="flex" justifyContent="flex-start" mt="20px">
+          <Button type="submit" color="secondary" variant="contained">
+            Update Alternative Phone
+          </Button>
+        </Box>
+      </form>
+      <form onSubmit={handleEmail} style={{ marginTop: "12px" }}>
+        <Box
+          display="grid"
+          gap="30px"
+          gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+          sx={{
+            "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+          }}
+        >
+          <TextField
+            fullWidth
+            variant="filled"
             type="email"
             label="Alternative Old Email Address"
             name="contact"

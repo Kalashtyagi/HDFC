@@ -17,6 +17,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import OtpInput from "react-otp-input";
 
 const ChangePass = () => {
   const Otp = 1234;
@@ -229,7 +230,7 @@ const ChangePass = () => {
         <DialogTitle>Enter OTP</DialogTitle>
         <DialogContent>
           <form>
-            <TextField
+            {/* <TextField
               fullWidth
               variant="filled"
               type="num"
@@ -238,6 +239,28 @@ const ChangePass = () => {
               required
               inputProps={{ maxLength: 4 }}
               onChange={(e) => setEnterOtp(e.target.value)}
+            /> */}
+            <OtpInput
+              inputType="number"
+              value={enterOtp}
+              onChange={setEnterOtp}
+              numInputs={4}
+              // renderSeparator={<span> </span>}
+              renderInput={(props) => (
+                <input
+                  {...props}
+                  style={{
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "5px",
+                    backgroundColor: "#03c6a1",
+                    border: "1px solid #ccc",
+                    textAlign: "center",
+                    fontSize: "16px",
+                    marginLeft: "20px",
+                  }}
+                />
+              )}
             />
           </form>
         </DialogContent>

@@ -66,9 +66,14 @@ const Bulkupload = () => {
   const [query, setQuery] = useState("");
   const [id, setId] = useState();
   const { isCollapsed } = useContext(SidebarContext);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleMenuItemClick = (event, id) => {
     setId(id);
+  };
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
   };
 
   const handleChange = (event) => {
@@ -101,7 +106,7 @@ const Bulkupload = () => {
         }}
       >
         <Box display="flex" justifyContent="space-between">
-          <Header title="Add Bulk Upload" />
+          <Header title="Bulk Upload" />
         </Box>
         <Grid container spacing={2}>
           <Grid item xs={4}>
@@ -158,8 +163,12 @@ const Bulkupload = () => {
               }}
             >
               Upload file
-              <VisuallyHiddenInput type="file" />
+              <VisuallyHiddenInput type="file" onChange={handleFileChange} />
             </Button>
+            <p>Accept only xls or xlsx</p>
+            <p style={{ color: "#03c6a1" }}>
+              {selectedFile ? selectedFile.name : "No file selected"}
+            </p>
           </Grid>
         </Grid>
       </Box>
