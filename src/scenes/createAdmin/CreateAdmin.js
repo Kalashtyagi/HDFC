@@ -128,8 +128,8 @@ const CreateAdmin = () => {
                 label="Admin Type"
                 onChange={handleChange}
               >
-                <MenuItem value={10}>Admin_SubAdmin</MenuItem>
-                <MenuItem value={20}>Admin_SuperAdmin</MenuItem>
+                <MenuItem value={10}>SubAdmin</MenuItem>
+                <MenuItem value={20}>SuperAdmin</MenuItem>
               </Select>
             </FormControl>
           </Box>

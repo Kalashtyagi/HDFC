@@ -20,6 +20,11 @@ import StatBox from "../../components/StatBox";
 import ProgressCircle from "../../components/ProgressCircle";
 import { newMerchant } from "../../data/mockData";
 import PieActiveArc from "../../components/PieChart";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormControl from "@mui/material/FormControl";
+import FormLabel from "@mui/material/FormLabel";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -199,22 +204,24 @@ const Dashboard = () => {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Box>
-              <Typography
-                variant="h5"
-                fontWeight="600"
-                color={colors.grey[100]}
+            <FormControl>
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
               >
-                In process
-              </Typography>
-              {/* <Typography
-                variant="h3"
-                fontWeight="bold"
-                color={colors.greenAccent[500]}
-              >
-                $59,342.32
-              </Typography> */}
-            </Box>
+                <FormControlLabel
+                  value="inprocess"
+                  control={<Radio />}
+                  label="In Process"
+                />
+                <FormControlLabel
+                  value="onBoarded"
+                  control={<Radio />}
+                  label="On Boarded"
+                />
+              </RadioGroup>
+            </FormControl>
           </Box>
           <Box height="250px" m="-20px 0 0 0">
             <LineChart isDashboard={true} />

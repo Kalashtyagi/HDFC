@@ -10,6 +10,7 @@ const data = [
 export default function PieActiveArc() {
   return (
     <PieChart
+      colors={["#00d1b0", "#266888", "#3aceff"]}
       series={[
         {
           data,
