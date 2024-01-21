@@ -3,9 +3,12 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
+import { SidebarContext } from "../global/SidebarContext";
+import { useContext } from "react";
 
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const { isCollapsed } = useContext(SidebarContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -49,7 +52,13 @@ const Form = () => {
   });
 
   return (
-    <Box m="20px">
+    <Box
+      m="20px"
+      sx={{
+        marginLeft: isCollapsed ? "100px" : "300px",
+        transition: "margin-left 0.3s",
+      }}
+    >
       <Box display="flex" justifyContent="space-between">
         <Header title="ADD MERCHANT" subtitle="Create a New Merchant Profile" />
         {/* <Button

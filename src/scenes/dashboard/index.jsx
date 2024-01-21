@@ -25,13 +25,22 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import { SidebarContext } from "../global/SidebarContext";
+import { useContext } from "react";
 
 const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const { isCollapsed } = useContext(SidebarContext);
 
   return (
-    <Box m="20px">
+    <Box
+      m="20px"
+      sx={{
+        marginLeft: isCollapsed ? "100px" : "300px",
+        transition: "margin-left 0.3s",
+      }}
+    >
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="DASHBOARD" subtitle="New Merchant-overview" />

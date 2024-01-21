@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -12,6 +12,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Button, TextField } from "@mui/material";
 import DataTable from "react-data-table-component";
+import { SidebarContext } from "../global/SidebarContext";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -41,6 +42,8 @@ export default function Saq() {
   const [apiData, setApiData] = useState([]);
   const [query, setQuery] = useState("");
   const [record, setRecord] = useState(apiData);
+  const { isCollapsed } = useContext(SidebarContext);
+
   const handleMenuItemClick = (event, id) => {
     setId(id);
   };
@@ -129,7 +132,13 @@ export default function Saq() {
   console.log("person", id);
   return (
     <>
-      <Box gridRow="span 6" sx={{ flexGrow: 1 }}>
+      <Box
+        gridRow="span 6"
+        sx={{
+          marginLeft: isCollapsed ? "100px" : "300px",
+          transition: "margin-left 0.3s",
+        }}
+      >
         <Grid container spacing={2} style={{ justifyContent: "space-between" }}>
           <Grid item xs={4}>
             <FormControl sx={{ m: 1, width: 300 }}>
@@ -165,15 +174,17 @@ export default function Saq() {
             ></TextField>
           </Grid>
         </Grid>
+
+        <DataTable
+          columns={columns}
+          data={apiData}
+          selectableRows
+          fixedHeader
+          pagination
+        />
       </Box>
+
       <br />
-      <DataTable
-        columns={columns}
-        data={apiData}
-        selectableRows
-        fixedHeader
-        pagination
-      />
     </>
   );
 }

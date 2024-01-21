@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -14,6 +14,7 @@ import AddIcon from "@mui/icons-material/Add";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
+import { SidebarContext } from "./SidebarContext";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -36,13 +37,42 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  // const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const [dialogOpen, setDialogOpen] = useState(false);
+  const { isCollapsed, setIsCollapsed } = useContext(SidebarContext);
+
+  const handleToggleSidebar = () => {
+    setIsCollapsed(!isCollapsed);
+  };
 
   return (
     <Box
+      // sx={{
+      //   "& .pro-sidebar-inner": {
+      //     background: `${colors.primary[400]} !important`,
+      //   },
+      //   "& .pro-icon-wrapper": {
+      //     backgroundColor: "transparent !important",
+      //   },
+      //   "& .pro-inner-item": {
+      //     padding: "5px 35px 5px 20px !important",
+      //   },
+      //   "& .pro-inner-item:hover": {
+      //     color: "#868dfb !important",
+      //   },
+      //   "& .pro-menu-item.active": {
+      //     color: "#6870fa !important",
+      //   },
+      // }}
       sx={{
+        position: "fixed",
+        top: 0, // Start from the top of the viewport
+        left: 0,
+        width: isCollapsed ? "80px" : "250px",
+        transition: "width 0.3s",
+        height: "100vh", // Full viewport height
+        // overflowY: 'auto',
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
         },
@@ -64,7 +94,8 @@ const Sidebar = () => {
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
+            // onClick={() => setIsCollapsed(!isCollapsed)}
+            onClick={handleToggleSidebar}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
               margin: "10px 0 20px 0",
@@ -135,7 +166,7 @@ const Sidebar = () => {
               />
               <Item
                 title="Add Bulk Order"
-                to="bulkupload"
+                to="/bulkupload"
                 icon={<FileCopyIcon />}
                 selected={selected}
                 setSelected={setSelected}

@@ -8,10 +8,14 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import React from "react";
+import { SidebarContext } from "../global/SidebarContext";
+import { useContext } from "react";
 
 const CreateAdmin = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [type, setType] = React.useState("");
+  const { isCollapsed } = useContext(SidebarContext);
+
   const handleChange = (event) => {
     setType(event.target.value);
   };
@@ -47,7 +51,13 @@ const CreateAdmin = () => {
   };
 
   return (
-    <Box m="20px">
+    <Box
+      m="20px"
+      sx={{
+        marginLeft: isCollapsed ? "100px" : "300px",
+        transition: "margin-left 0.3s",
+      }}
+    >
       <Box display="flex" justifyContent="space-between">
         <Header title="Create Admin" subtitle="Create a New Admin" />
       </Box>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { useState, useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -13,7 +13,8 @@ import Select from "@mui/material/Select";
 import { Button, TextField } from "@mui/material";
 import DataTable from "react-data-table-component";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-
+import { SidebarContext } from "../global/SidebarContext";
+import { useContext } from "react";
 
 function getStyles(name, personName, theme) {
   return {
@@ -23,7 +24,6 @@ function getStyles(name, personName, theme) {
         : theme.typography.fontWeightMedium,
   };
 }
-
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -39,25 +39,23 @@ const MenuProps = {
 const CustomOutlinedInput = styled(OutlinedInput)({
   "&.MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "white", 
+      borderColor: "white",
     },
     "&:hover fieldset": {
-      borderColor: "white", 
+      borderColor: "white",
     },
     "&.Mui-focused fieldset": {
-      borderColor: "white", 
+      borderColor: "white",
     },
   },
 });
 
-
 const hardcodedOptions = [
-  { id: 1, name: ' 1' },
-  { id: 2, name: ' 2' },
-  { id: 3, name: '3' },
-  { id: 4, name: ' 4' },
+  { id: 1, name: " 1" },
+  { id: 2, name: " 2" },
+  { id: 3, name: "3" },
+  { id: 4, name: " 4" },
 ];
-
 
 const Bulkupload = () => {
   const theme = useTheme();
@@ -66,6 +64,7 @@ const Bulkupload = () => {
   const [apiData, setApiData] = useState([]);
   const [query, setQuery] = useState("");
   const [id, setId] = useState();
+  const { isCollapsed } = useContext(SidebarContext);
 
   const handleMenuItemClick = (event, id) => {
     setId(id);
@@ -92,14 +91,24 @@ const Bulkupload = () => {
 
   return (
     <div>
- <Box gridRow="span 6" sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2} >
+      <Box
+        gridRow="span 6"
+        sx={{
+          flexGrow: 1,
+          marginLeft: isCollapsed ? "100px" : "300px",
+          transition: "margin-left 0.3s",
+        }}
+      >
+        <Grid container spacing={2}>
           <Grid item xs={4}>
-          
             <FormControl sx={{ m: 1, width: 300 }}>
-              <InputLabel id="demo-multiple-name-label" style={{color:'white'}}>User Type</InputLabel>
-     
-    
+              <InputLabel
+                id="demo-multiple-name-label"
+                style={{ color: "white" }}
+              >
+                User Type
+              </InputLabel>
+
               <Select
                 labelId="demo-multiple-name-label"
                 id="demo-multiple-name"
@@ -132,29 +141,26 @@ const Bulkupload = () => {
               </Select>
             </FormControl>
           </Grid>
-         <Grid item sx={2}
-         style={{marginTop:'13px'}}
-         >
-         <Button
-          component="label"
-          variant="contained"
-          startIcon={<CloudUploadIcon />}
-          style={{
-            fontSize: "20px",
-            color: "blueviolet",
-            backgroundColor: "white",
-            height: "40px",
-          }}
-        >
-          Upload file
-          <VisuallyHiddenInput type="file" />
-        </Button>
-         </Grid>
+          <Grid item sx={2} style={{ marginTop: "13px" }}>
+            <Button
+              component="label"
+              variant="contained"
+              startIcon={<CloudUploadIcon />}
+              style={{
+                fontSize: "20px",
+                color: "blueviolet",
+                backgroundColor: "white",
+                height: "40px",
+              }}
+            >
+              Upload file
+              <VisuallyHiddenInput type="file" />
+            </Button>
+          </Grid>
         </Grid>
       </Box>
-      
     </div>
-  )
-}
+  );
+};
 
-export default Bulkupload
+export default Bulkupload;

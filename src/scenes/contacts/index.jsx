@@ -4,10 +4,13 @@ import { tokens } from "../../theme";
 import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
+import { SidebarContext } from "../global/SidebarContext";
+import { useContext } from "react";
 
 const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const { isCollapsed } = useContext(SidebarContext);
 
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
@@ -53,7 +56,13 @@ const Contacts = () => {
   ];
 
   return (
-    <Box m="20px">
+    <Box
+      m="20px"
+      sx={{
+        marginLeft: isCollapsed ? "100px" : "300px",
+        transition: "margin-left 0.3s",
+      }}
+    >
       <Header
         title="CONTACTS"
         subtitle="List of Contacts for Future Reference"
