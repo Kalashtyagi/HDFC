@@ -15,6 +15,7 @@ import DataTable from "react-data-table-component";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { SidebarContext } from "../global/SidebarContext";
 import { useContext } from "react";
+import Header from "../../components/Header";
 
 function getStyles(name, personName, theme) {
   return {
@@ -99,6 +100,9 @@ const Bulkupload = () => {
           transition: "margin-left 0.3s",
         }}
       >
+        <Box display="flex" justifyContent="space-between">
+          <Header title="Add Bulk Upload" />
+        </Box>
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <FormControl sx={{ m: 1, width: 300 }}>

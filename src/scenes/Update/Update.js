@@ -10,7 +10,7 @@ const Update = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const { isCollapsed } = useContext(SidebarContext);
 
-  const handleSubmit = async (event) => {
+  const handleEmail = async (event) => {
     event.preventDefault();
     alert("submit");
 
@@ -52,7 +52,7 @@ const Update = () => {
         <Header title="Edit Admin Data" />
       </Box>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleEmail}>
         <Box
           display="grid"
           gap="30px"
@@ -64,9 +64,9 @@ const Update = () => {
           <TextField
             fullWidth
             variant="filled"
-            type="text"
+            type="email"
             label="Old Email Address"
-            name="firstName"
+            name="oldemail"
             sx={{ gridColumn: "span 2" }}
             required
           />
@@ -74,17 +74,32 @@ const Update = () => {
           <TextField
             fullWidth
             variant="filled"
-            type="text"
+            type="email"
             label="New Email Address"
-            name="email"
+            name="newemail"
             sx={{ gridColumn: "span 2" }}
             required
           />
-
+        </Box>
+        <Box display="flex" justifyContent="start" mt="20px">
+          <Button type="submit" color="secondary" variant="contained">
+            Update Email Address
+          </Button>
+        </Box>
+      </form>
+      <form onSubmit={handleEmail} style={{ marginTop: "12px" }}>
+        <Box
+          display="grid"
+          gap="30px"
+          gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+          sx={{
+            "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+          }}
+        >
           <TextField
             fullWidth
             variant="filled"
-            type="text"
+            type="number"
             label="Old Phone Number"
             name="contact"
             sx={{ gridColumn: "span 2" }}
@@ -93,17 +108,32 @@ const Update = () => {
           <TextField
             fullWidth
             variant="filled"
-            type="text"
+            type="number"
             label="New Phone Number"
             name="contact"
             sx={{ gridColumn: "span 2" }}
             required
           />
-
+        </Box>
+        <Box display="flex" justifyContent="start" mt="20px">
+          <Button type="submit" color="secondary" variant="contained">
+            Update Phone Number
+          </Button>
+        </Box>
+      </form>
+      <form onSubmit={handleEmail} style={{ marginTop: "12px" }}>
+        <Box
+          display="grid"
+          gap="30px"
+          gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+          sx={{
+            "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+          }}
+        >
           <TextField
             fullWidth
             variant="filled"
-            type="text"
+            type="email"
             label="Alternative Old Email Address"
             name="contact"
             sx={{ gridColumn: "span 2" }}
@@ -112,16 +142,16 @@ const Update = () => {
           <TextField
             fullWidth
             variant="filled"
-            type="text"
+            type="email"
             label="Alternative New Email Address"
             name="contact"
             sx={{ gridColumn: "span 2" }}
             required
           />
         </Box>
-        <Box display="flex" justifyContent="center" mt="20px">
+        <Box display="flex" justifyContent="flex-start" mt="20px">
           <Button type="submit" color="secondary" variant="contained">
-            Update Admin Info
+            Update Alternative Email
           </Button>
         </Box>
       </form>

@@ -9,7 +9,7 @@ import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import QuizSharpIcon from "@mui/icons-material/QuizSharp";
+import AddToPhotosIcon from "@mui/icons-material/AddToPhotos";
 import AddIcon from "@mui/icons-material/Add";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -181,9 +181,9 @@ const Sidebar = () => {
               Forms
             </Typography>
             <Item
-              title="SAQs"
+              title="Add Form"
               to="/saqs"
-              icon={<QuizSharpIcon />}
+              icon={<AddToPhotosIcon />}
               selected={selected}
               setSelected={setSelected}
             />

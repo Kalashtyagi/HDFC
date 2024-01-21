@@ -14,8 +14,25 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
 import { SidebarContext } from "../global/SidebarContext";
 import { useContext } from "react";
+import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ChangePass = () => {
+  const Otp = 1234;
+  const [enterOtp, setEnterOtp] = useState("");
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    watch,
+    reset,
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    // reset();
+    setOpenModal(true);
+  };
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const { isCollapsed } = useContext(SidebarContext);
 
@@ -29,35 +46,58 @@ const ChangePass = () => {
     setOpenModal(false);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    alert("submit");
-
-    const formData = new FormData(event.target);
-    const data = {};
-    formData.forEach((value, key) => {
-      data[key] = value;
-    });
-    console.log("data", data);
-
-    try {
-      const response = await fetch("url", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
+  const checkOtp = () => {
+    if (enterOtp.length === 0) {
+      toast.warning("please fill otp", {
+        position: "top-center",
       });
-
-      if (response.ok) {
-        console.log("Data successfully submitted:", data);
-      } else {
-        console.error("Error submitting data:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error:", error.message);
+    } else if (enterOtp.length !== 4) {
+      toast.error("Otp must contains 4 digit ", {
+        position: "top-center",
+      });
+    } else if (Otp == enterOtp) {
+      console.log("succes");
+      toast.success("reset password successfully", {
+        position: "top-center",
+      });
+      reset();
+      setOpenModal(false);
+    } else {
+      toast.error("Otp does not match", {
+        position: "top-center",
+      });
+      console.log("unsecces");
     }
   };
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   alert("submit");
+
+  //   const formData = new FormData(event.target);
+  //   const data = {};
+  //   formData.forEach((value, key) => {
+  //     data[key] = value;
+  //   });
+  //   console.log("data", data);
+
+  //   try {
+  //     const response = await fetch("url", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(data),
+  //     });
+
+  //     if (response.ok) {
+  //       console.log("Data successfully submitted:", data);
+  //     } else {
+  //       console.error("Error submitting data:", response.statusText);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error.message);
+  //   }
+  // };
 
   return (
     <Box
@@ -71,77 +111,133 @@ const ChangePass = () => {
         <Header title="Change Password" subtitle="Create a New Password" />
       </Box>
 
-      <form onSubmit={handleSubmit}>
-        <Box
-          display="grid"
-          gap="30px"
-          gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-          sx={{
-            "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-          }}
-        >
+      {/* <form onSubmit={handleSubmit(onSubmit)}> */}
+      <Box
+        component="form"
+        onSubmit={handleSubmit(onSubmit)}
+        display="grid"
+        gap="30px"
+        gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+        sx={{
+          "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+        }}
+      >
+        <div>
           <TextField
             fullWidth
             variant="filled"
-            type="text"
-            label="Old Password"
-            name="firstName"
+            type="password"
+            label="Old password"
+            name="oldpassword"
             sx={{ gridColumn: "span 2" }}
-            required
+            {...register("oldpassword", {
+              required: true,
+              minLength: 4,
+              maxLength: 8,
+            })}
           />
-
+          <br />
+          <span
+            style={{
+              position: "absolute",
+              color: "red",
+              fontSize: "14px",
+              // marginTop: "50px",
+            }}
+          >
+            {errors.oldpassword?.type === "required" && "Password is required"}
+            {errors.oldpassword?.type === "minLength" &&
+              "Password length must be 4"}
+            {errors.oldpassword?.type === "maxLength" &&
+              "Password contains less than 20 character"}
+          </span>
+        </div>
+        <div>
           <TextField
             fullWidth
             variant="filled"
-            type="text"
+            type="password"
             label="New Password"
-            name="email"
+            name="newpassword"
             sx={{ gridColumn: "span 2" }}
-            required
+            {...register("newpassword", {
+              required: true,
+              minLength: 4,
+              maxLength: 8,
+            })}
           />
+          <br />
+          <span
+            style={{
+              position: "absolute",
+              color: "red",
+              fontSize: "14px",
+            }}
+          >
+            {errors.newpassword?.type === "required" && "Fill new Password"}
+            {errors.newpassword?.type === "minLength" &&
+              "Password length must be 4"}
+            {errors.newpassword?.type === "maxLength" &&
+              "Password contains less than 20 character"}
+          </span>
+        </div>
+        <div>
           <TextField
             fullWidth
             variant="filled"
-            type="text"
+            type="password"
             label="Confirm New Password"
-            name="contact"
+            name="confirmNewPassword"
             sx={{ gridColumn: "span 2" }}
-            required
+            {...register("confirmNewPassword", {
+              required: true,
+              validate: (value) => value === watch("newpassword"),
+            })}
           />
-          {/* <TextField
-            fullWidth
-            variant="filled"
-            type="text"
-            label="OTP"
-            name="contact"
-            sx={{ gridColumn: "span 2" }}
-            required
-          /> */}
-        </Box>
+          <br />
+          <span
+            style={{
+              position: "absolute",
+              color: "red",
+              fontSize: "14px",
+              // marginTop: "50px",
+            }}
+          >
+            {errors.confirmNewPassword?.type === "required" &&
+              "Password is required"}
+            {errors.confirmNewPassword?.type === "validate" &&
+              "Password does not match"}
+          </span>
+        </div>
+
         <Box display="flex" justifyContent="center" mt="20px">
           <Button
             type="submit"
             color="secondary"
             variant="contained"
-            onClick={handleGenerateOTP}
+            // onClick={handleGenerateOTP}
           >
             Generate OTP
           </Button>
         </Box>
-      </form>
+      </Box>
+
+      {/* </form> */}
 
       {/* OTP Modal */}
       <Dialog open={openModal} onClose={handleCloseModal}>
         <DialogTitle>Enter OTP</DialogTitle>
         <DialogContent>
-          <form onSubmit={handleSubmit}>
+          <form>
             <TextField
               fullWidth
               variant="filled"
-              type="text"
+              type="num"
               label="OTP"
               name="otp"
               required
+              inputProps={{ maxLength: 4 }}
+              onChange={(e) => setEnterOtp(e.target.value)}
             />
           </form>
         </DialogContent>
@@ -149,11 +245,12 @@ const ChangePass = () => {
           <Button onClick={handleCloseModal} style={{ color: "white" }}>
             Cancel
           </Button>
-          <Button onClick={handleCloseModal} style={{ color: "white" }}>
+          <Button onClick={checkOtp} style={{ color: "white" }}>
             Change Password
           </Button>
         </DialogActions>
       </Dialog>
+      <ToastContainer />
     </Box>
   );
 };

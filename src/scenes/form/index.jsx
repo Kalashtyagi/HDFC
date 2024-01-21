@@ -3,12 +3,22 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import React from "react";
 import { SidebarContext } from "../global/SidebarContext";
 import { useContext } from "react";
 
 const Form = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [type, setType] = React.useState("");
   const { isCollapsed } = useContext(SidebarContext);
+
+  const handleChange = (event) => {
+    setType(event.target.value);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -39,17 +49,6 @@ const Form = () => {
       console.error("Error:", error.message);
     }
   };
-  const VisuallyHiddenInput = styled("input")({
-    clip: "rect(0 0 0 0)",
-    clipPath: "inset(50%)",
-    height: 1,
-    overflow: "hidden",
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    whiteSpace: "nowrap",
-    width: 1,
-  });
 
   return (
     <Box
@@ -60,21 +59,7 @@ const Form = () => {
       }}
     >
       <Box display="flex" justifyContent="space-between">
-        <Header title="ADD MERCHANT" subtitle="Create a New Merchant Profile" />
-        {/* <Button
-          component="label"
-          variant="contained"
-          startIcon={<CloudUploadIcon />}
-          style={{
-            fontSize: "20px",
-            color: "blueviolet",
-            backgroundColor: "white",
-            height: "40px",
-          }}
-        >
-          Upload file
-          <VisuallyHiddenInput type="file" />
-        </Button> */}
+        <Header title="Add Merchant " subtitle="Create a New Merchant" />
       </Box>
 
       <form onSubmit={handleSubmit}>
@@ -90,9 +75,9 @@ const Form = () => {
             fullWidth
             variant="filled"
             type="text"
-            label="First Name"
-            name="firstName"
-            sx={{ gridColumn: "span 4" }}
+            label="Name"
+            name="name"
+            sx={{ gridColumn: "span 2" }}
             required
           />
 
@@ -102,18 +87,46 @@ const Form = () => {
             type="text"
             label="Email"
             name="email"
-            sx={{ gridColumn: "span 4" }}
+            sx={{ gridColumn: "span 2" }}
             required
           />
           <TextField
             fullWidth
             variant="filled"
             type="text"
-            label="Contact Number"
+            label="Address"
             name="contact"
-            sx={{ gridColumn: "span 4" }}
+            sx={{ gridColumn: "span 2" }}
             required
           />
+          <TextField
+            fullWidth
+            variant="filled"
+            type="text"
+            label="Phone Number"
+            name="contact"
+            sx={{ gridColumn: "span 2" }}
+            required
+          />
+          <Box sx={{ gridColumn: "span 2" }}>
+            <FormControl variant="filled" fullWidth>
+              <InputLabel id="demo-simple-select-filled-label">
+                Merchant Type
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={type}
+                label="Admin Type"
+                onChange={handleChange}
+              >
+                <MenuItem value={10}>Level 1</MenuItem>
+                <MenuItem value={20}>Level 2</MenuItem>
+                <MenuItem value={20}>Level 3</MenuItem>
+                <MenuItem value={20}>Level 4</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
         </Box>
         <Box display="flex" justifyContent="center" mt="20px">
           <Button type="submit" color="secondary" variant="contained">
