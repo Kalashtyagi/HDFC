@@ -10,8 +10,10 @@ import Select from "@mui/material/Select";
 import React from "react";
 import { SidebarContext } from "../global/SidebarContext";
 import { useContext } from "react";
+import { DarkContext } from "../global/DarkBar";
 
 const Form = () => {
+  const { isDark } = useContext(DarkContext);
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [type, setType] = React.useState("");
   const { isCollapsed } = useContext(SidebarContext);
@@ -78,14 +80,24 @@ const Form = () => {
             label="Name"
             name="name"
             sx={{ gridColumn: "span 2" }}
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             required
           />
 
           <TextField
             fullWidth
             variant="filled"
-            type="text"
+            type="email"
             label="Email"
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             name="email"
             sx={{ gridColumn: "span 2" }}
             required
@@ -95,22 +107,35 @@ const Form = () => {
             variant="filled"
             type="text"
             label="Address"
-            name="contact"
+            name="address"
             sx={{ gridColumn: "span 2" }}
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             required
           />
           <TextField
             fullWidth
             variant="filled"
-            type="text"
+            type="number"
             label="Phone Number"
             name="contact"
             sx={{ gridColumn: "span 2" }}
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             required
           />
           <Box sx={{ gridColumn: "span 2" }}>
             <FormControl variant="filled" fullWidth>
-              <InputLabel id="demo-simple-select-filled-label">
+              <InputLabel
+                id="demo-simple-select-filled-label"
+                style={{ color: isDark ? "black" : "white" }}
+              >
                 Merchant Type
               </InputLabel>
               <Select

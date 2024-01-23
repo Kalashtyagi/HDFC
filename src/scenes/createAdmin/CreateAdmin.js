@@ -10,8 +10,10 @@ import Select from "@mui/material/Select";
 import React from "react";
 import { SidebarContext } from "../global/SidebarContext";
 import { useContext } from "react";
+import { DarkContext } from "../global/DarkBar";
 
 const CreateAdmin = () => {
+  const { isDark } = useContext(DarkContext);
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [type, setType] = React.useState("");
   const { isCollapsed } = useContext(SidebarContext);
@@ -78,6 +80,11 @@ const CreateAdmin = () => {
             label="Full Name"
             name="firstName"
             sx={{ gridColumn: "span 2" }}
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             required
           />
 
@@ -88,6 +95,11 @@ const CreateAdmin = () => {
             label="Email"
             name="email"
             sx={{ gridColumn: "span 2" }}
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             required
           />
           <TextField
@@ -95,8 +107,13 @@ const CreateAdmin = () => {
             variant="filled"
             type="text"
             label="Alternate Email"
-            name="contact"
+            name="alternate email"
             sx={{ gridColumn: "span 2" }}
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             required
           />
           <TextField
@@ -104,7 +121,12 @@ const CreateAdmin = () => {
             variant="filled"
             type="password"
             label="Password"
-            name="contact"
+            name="password"
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             sx={{ gridColumn: "span 2" }}
             required
           />
@@ -114,6 +136,11 @@ const CreateAdmin = () => {
             type="text"
             label="Phone Number"
             name="contact"
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             sx={{ gridColumn: "span 2" }}
             required
           />
@@ -122,13 +149,21 @@ const CreateAdmin = () => {
             variant="filled"
             type="text"
             label="Alternate Phone Number"
-            name="contact"
+            name="alternate phone number"
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             sx={{ gridColumn: "span 2" }}
             required
           />
           <Box sx={{ gridColumn: "span 2" }}>
             <FormControl variant="filled" fullWidth>
-              <InputLabel id="demo-simple-select-filled-label">
+              <InputLabel
+                id="demo-simple-select-filled-label"
+                style={{ color: isDark ? "black" : "white" }}
+              >
                 Admin Type
               </InputLabel>
               <Select

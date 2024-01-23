@@ -5,12 +5,13 @@ const data = [
   { id: 0, value: 10, label: "UttarPradesh" },
   { id: 1, value: 15, label: "Delhi" },
   { id: 2, value: 20, label: "Pune" },
+  { id: 3, value: 6, label: "other" },
 ];
 
 export default function PieActiveArc() {
   return (
     <PieChart
-      colors={["#00d1b0", "#266888", "#3aceff"]}
+      colors={["#00d1b0", "#266888", "#3aceff", "#2888"]}
       series={[
         {
           data,

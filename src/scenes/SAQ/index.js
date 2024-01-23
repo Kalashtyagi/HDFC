@@ -205,11 +205,13 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormLabel from "@mui/material/FormLabel";
+import { DarkContext } from "../global/DarkBar";
 
 const AddForm = () => {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [type, setType] = React.useState("");
   const { isCollapsed } = useContext(SidebarContext);
+  const { isDark } = useContext(DarkContext);
 
   const handleChange = (event) => {
     setType(event.target.value);
@@ -274,6 +276,11 @@ const AddForm = () => {
             name="title"
             sx={{ gridColumn: "span 2" }}
             required
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
           />
           <TextField
             fullWidth
@@ -283,16 +290,26 @@ const AddForm = () => {
             name="version"
             sx={{ gridColumn: "span 2" }}
             required
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
           />
           <TextField
             fullWidth
-            variant="outlined"
+            variant="filled"
             type="file"
             name="template"
-            label="Template Type"
+            helperText="Template Type"
             sx={{ gridColumn: "span 2" }}
             required
             inputProps={{ accept: ".pdf" }}
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
           />
           <TextField
             fullWidth
@@ -302,10 +319,18 @@ const AddForm = () => {
             name="contact"
             sx={{ gridColumn: "span 2" }}
             required
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
           />
           <Box sx={{ gridColumn: "span 2" }}>
             <FormControl variant="filled" fullWidth>
-              <InputLabel id="demo-simple-select-filled-label">
+              <InputLabel
+                id="demo-simple-select-filled-label"
+                style={{ color: isDark ? "black" : "white" }}
+              >
                 Form Type
               </InputLabel>
               <Select
@@ -319,7 +344,7 @@ const AddForm = () => {
               </Select>
             </FormControl>
           </Box>
-          <FormControl>
+          {/* <FormControl>
             <FormLabel id="demo-row-radio-buttons-group-label">
               Is Active
             </FormLabel>
@@ -339,7 +364,7 @@ const AddForm = () => {
                 label="Not Active"
               />
             </RadioGroup>
-          </FormControl>
+          </FormControl> */}
           <TextField
             fullWidth
             variant="filled"
@@ -348,15 +373,26 @@ const AddForm = () => {
             name="totalParts"
             sx={{ gridColumn: "span 2" }}
             required
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
           />
 
           <TextField
             id="outlined-multiline-static"
             label="Description"
             multiline
+            variant="filled"
             rows={3}
             sx={{ gridColumn: "span 2" }}
-            defaultValue="Add Description"
+            placeholder="Add Description"
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
           />
         </Box>
         <Box display="flex" justifyContent="center" mt="20px">

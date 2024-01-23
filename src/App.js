@@ -3,7 +3,6 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
-import Contacts from "./scenes/contacts";
 import Form from "./scenes/form";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
@@ -14,6 +13,9 @@ import CreateAdmin from "./scenes/createAdmin/CreateAdmin";
 import ChangePass from "./scenes/ChangePassword/ChangePass";
 import ResetPass from "./scenes/Reset password/ResetPass";
 import Bulkupload from "./scenes/form/Bulkupload";
+import MerchantList from "./scenes/MerchantList/index";
+import MerchantForm from "./scenes/MerchantList/MerchantForm";
+import FormInfo from "./scenes/MerchantList/FormInfo";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -39,7 +41,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/contacts" element={<Contacts />} />
+              <Route path="/merchantList" element={<MerchantList />} />
               <Route path="/form" element={<Form />} />
               <Route path="/update" element={<Update />} />
               <Route path="/createAdmin" element={<CreateAdmin />} />
@@ -47,6 +49,8 @@ function App() {
               <Route path="/changePassword" element={<ChangePass />} />
               <Route path="/reset-password" element={<ResetPass />} />
               <Route path="bulkupload" element={<Bulkupload />} />
+              <Route path="merchantForm" element={<MerchantForm />} />
+              <Route path="formInformation" element={<FormInfo />} />
             </Routes>
           </main>
         </div>

@@ -99,7 +99,7 @@ export const mockDataTeam = [
 export const mockDataContacts = [
   {
     id: 1,
-    name: "Jon Snow",
+    name: "Jon Snow Jon Snow Jon snow",
     email: "jonsnow@gmail.com",
     age: 35,
     phone: "(665)121-5454",

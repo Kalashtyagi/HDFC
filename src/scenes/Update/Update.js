@@ -5,8 +5,10 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { styled } from "@mui/material/styles";
 import { SidebarContext } from "../global/SidebarContext";
 import { useContext } from "react";
+import { DarkContext } from "../global/DarkBar";
 
 const Update = () => {
+  const { isDark } = useContext(DarkContext);
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const { isCollapsed } = useContext(SidebarContext);
 
@@ -65,8 +67,13 @@ const Update = () => {
             fullWidth
             variant="filled"
             type="email"
-            label="Old Email Address"
+            label="Old Email"
             name="oldemail"
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             sx={{ gridColumn: "span 2" }}
             required
           />
@@ -77,6 +84,11 @@ const Update = () => {
             type="email"
             label="New Email Address"
             name="newemail"
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             sx={{ gridColumn: "span 2" }}
             required
           />
@@ -101,7 +113,12 @@ const Update = () => {
             variant="filled"
             type="number"
             label="Old Phone Number"
-            name="contact"
+            name="oldcontact"
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             sx={{ gridColumn: "span 2" }}
             required
           />
@@ -110,7 +127,12 @@ const Update = () => {
             variant="filled"
             type="number"
             label="New Phone Number"
-            name="contact"
+            name="newcontact"
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             sx={{ gridColumn: "span 2" }}
             required
           />
@@ -135,7 +157,12 @@ const Update = () => {
             variant="filled"
             type="number"
             label="Alternative old Phone Number"
-            name="contact"
+            name="alternativeoldcontact"
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             sx={{ gridColumn: "span 2" }}
             required
           />
@@ -144,8 +171,13 @@ const Update = () => {
             variant="filled"
             type="number"
             label="Alternative new Phone Number"
-            name="contact"
+            name="alternativenewcontact"
             sx={{ gridColumn: "span 2" }}
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             required
           />
         </Box>
@@ -168,8 +200,13 @@ const Update = () => {
             fullWidth
             variant="filled"
             type="email"
-            label="Alternative Old Email Address"
-            name="contact"
+            label="Alternative Old Email"
+            name="alternativeoldemail"
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             sx={{ gridColumn: "span 2" }}
             required
           />
@@ -178,7 +215,12 @@ const Update = () => {
             variant="filled"
             type="email"
             label="Alternative New Email Address"
-            name="contact"
+            name="alternativenewemail"
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             sx={{ gridColumn: "span 2" }}
             required
           />

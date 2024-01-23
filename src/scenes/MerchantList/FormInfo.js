@@ -7,18 +7,18 @@ import { useTheme } from "@mui/material";
 import { SidebarContext } from "../global/SidebarContext";
 import { useContext } from "react";
 
-const Contacts = () => {
+const FormInfo = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { isCollapsed } = useContext(SidebarContext);
 
   const columns = [
-    { field: "id", headerName: "ID", flex: 0.5 },
+    { field: "id", headerName: "ID", flex: 1.5 },
     // { field: "registrarId", headerName: "Registrar ID" },
     {
       field: "name",
       headerName: "Name",
-      flex: 1,
+      flex: 4.5,
       cellClassName: "name-column--cell",
     },
     // {
@@ -31,17 +31,17 @@ const Contacts = () => {
     {
       field: "phone",
       headerName: "Phone Number",
-      flex: 1,
+      flex: 4,
     },
     {
       field: "email",
       headerName: "Email",
-      flex: 1,
+      flex: 6,
     },
     {
       field: "address",
       headerName: "Address",
-      flex: 1,
+      flex: 7,
     },
     // {
     //   field: "city",
@@ -63,7 +63,7 @@ const Contacts = () => {
         transition: "margin-left 0.3s",
       }}
     >
-      <Header title="Merchant List" subtitle="List of Merchants" />
+      <Header title="Form Information" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -106,4 +106,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default FormInfo;

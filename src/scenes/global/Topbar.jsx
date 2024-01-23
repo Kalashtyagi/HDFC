@@ -8,11 +8,17 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
-
+import { DarkContext } from "./DarkBar";
 const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const { isDark, SetIsDark } = useContext(DarkContext);
+
+  const handleIconClick = () => {
+    colorMode.toggleColorMode(); // Toggle the color mode using the ColorModeContext
+    SetIsDark(!isDark); // Toggle the isDark value using the DarkContext
+  };
 
   return (
     <Box display="flex" justifyContent="flex-end" p={2}>
@@ -27,12 +33,8 @@ const Topbar = () => {
 
       {/* ICONS */}
       <Box display="flex">
-        <IconButton onClick={colorMode.toggleColorMode}>
-          {theme.palette.mode === "dark" ? (
-            <DarkModeOutlinedIcon />
-          ) : (
-            <LightModeOutlinedIcon />
-          )}
+        <IconButton onClick={handleIconClick}>
+          {isDark ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
         </IconButton>
         {/* <IconButton>
           <NotificationsOutlinedIcon />

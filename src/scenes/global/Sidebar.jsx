@@ -15,6 +15,8 @@ import FileCopyIcon from "@mui/icons-material/FileCopy";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LockPersonIcon from "@mui/icons-material/LockPerson";
 import { SidebarContext } from "./SidebarContext";
+import FeedIcon from "@mui/icons-material/Feed";
+import ArticleIcon from "@mui/icons-material/Article";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -137,8 +139,22 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Merchant Information"
-              to="/contacts"
+              to="/merchantList"
               icon={<ContactsOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Form Information"
+              to="/formInformation"
+              icon={<FeedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Merchant Submission"
+              to="/merchantForm"
+              icon={<ArticleIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -158,14 +174,14 @@ const Sidebar = () => {
               }}
             >
               <Item
-                title="Add Single Merchant"
+                title="Single Merchant"
                 to="/form"
                 icon={<PersonAddIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
               <Item
-                title="Add Bulk Order"
+                title="Bulk Order"
                 to="/bulkupload"
                 icon={<FileCopyIcon />}
                 selected={selected}

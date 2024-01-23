@@ -286,7 +286,7 @@ const Dashboard = () => {
                 >
                   {newItem.merchant}
                 </Typography>
-                <Box display="flex">
+                <Box display="flex" marginTop="25px">
                   <IconButton>
                     <DownloadOutlinedIcon
                       sx={{
@@ -299,6 +299,7 @@ const Dashboard = () => {
                     variant="contained"
                     sx={{
                       fontSize: "15px",
+                      marginRight: "10px",
                       color: colors.greenAccent[500],
                     }}
                   >

@@ -18,8 +18,10 @@ import { useForm } from "react-hook-form";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OtpInput from "react-otp-input";
+import { DarkContext } from "../global/DarkBar";
 
 const ChangePass = () => {
+  const { isDark } = useContext(DarkContext);
   const Otp = 1234;
   const [enterOtp, setEnterOtp] = useState("");
   const {
@@ -130,6 +132,11 @@ const ChangePass = () => {
             type="password"
             label="Old password"
             name="oldpassword"
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             sx={{ gridColumn: "span 2" }}
             {...register("oldpassword", {
               required: true,
@@ -161,6 +168,11 @@ const ChangePass = () => {
             label="New Password"
             name="newpassword"
             sx={{ gridColumn: "span 2" }}
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             {...register("newpassword", {
               required: true,
               minLength: 4,
@@ -190,6 +202,11 @@ const ChangePass = () => {
             label="Confirm New Password"
             name="confirmNewPassword"
             sx={{ gridColumn: "span 2" }}
+            InputLabelProps={{
+              style: {
+                color: isDark ? "black" : "white",
+              },
+            }}
             {...register("confirmNewPassword", {
               required: true,
               validate: (value) => value === watch("newpassword"),
@@ -211,7 +228,7 @@ const ChangePass = () => {
           </span>
         </div>
 
-        <Box display="flex" justifyContent="center" mt="20px">
+        <Box mt="10px" ml="40px">
           <Button
             type="submit"
             color="secondary"
@@ -227,7 +244,9 @@ const ChangePass = () => {
 
       {/* OTP Modal */}
       <Dialog open={openModal} onClose={handleCloseModal}>
-        <DialogTitle>Enter OTP</DialogTitle>
+        <DialogTitle style={{ marginLeft: "50px", fontWeight: "bold" }}>
+          Enter OTP
+        </DialogTitle>
         <DialogContent>
           <form>
             {/* <TextField
@@ -241,7 +260,7 @@ const ChangePass = () => {
               onChange={(e) => setEnterOtp(e.target.value)}
             /> */}
             <OtpInput
-              inputType="number"
+              inputType="tel"
               value={enterOtp}
               onChange={setEnterOtp}
               numInputs={4}
@@ -253,11 +272,12 @@ const ChangePass = () => {
                     width: "40px",
                     height: "40px",
                     borderRadius: "5px",
-                    backgroundColor: "#03c6a1",
-                    border: "1px solid #ccc",
+                    backgroundColor: "ffff",
+                    border: "1px solid black",
                     textAlign: "center",
-                    fontSize: "16px",
-                    marginLeft: "20px",
+                    color: "black",
+                    fontSize: "20px",
+                    marginLeft: "5px",
                   }}
                 />
               )}
