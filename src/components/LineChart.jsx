@@ -17,13 +17,13 @@ export default function DashedLineChart() {
       xAxis={[{ scaleType: "point", data: xLabels }]}
       sx={{
         ".MuiLineElement-root, .MuiMarkElement-root": {
-          strokeWidth: 1,
+          strokeWidth: 2,
         },
         ".MuiLineElement-series-pvId": {
-          strokeDasharray: "5 5",
+          strokeDasharray: "0 0",
         },
         ".MuiLineElement-series-uvId": {
-          strokeDasharray: "3 4 5 2",
+          strokeDasharray: "0 0 0 0",
         },
         ".MuiMarkElement-root:not(.MuiMarkElement-highlighted)": {
           fill: "#fff",
